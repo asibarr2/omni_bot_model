@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<robot name="omnibot" xmlns:xacro="http://ros.org/wiki/xacro">
+   <xacro:include filename="$(find omni_bot_model)/urdf/zed_descr.urdf.xacro" />
+   <xacro:include filename="$(find omni_bot_model)/urdf/rplidar.urdf.xacro" />
+
+<!-- Materials -->
+  <material name="gray">
+   <color rgba="0.7 0.7 0.7 1"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+<!-- LINKS ARE LOCATED BELOW -->
+
+<!-- Establish the base of the vehicle -->
+  <link name="base_link">
+    <visual>
+      <!-- Remember that this controls the position of the chassis, it doesnt change the transform position -->
+      <origin rpy="1.5708 0 -1.5708" xyz="-0.01 0.058 0.05" />
+      <geometry>1
+        <mesh filename="package://omni_bot_model/meshes/donkeycar.stl" scale="0.001 0.001 0.001"/> 
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="jetson">
+    <visual>
+      <!-- Remember that this controls the position of the jetson, it doesnt change the transform position -->
+      <origin rpy="0 0 0" xyz="0.0 0 0.0" />
+      <geometry>
+        <mesh filename="package://omni_bot_model/meshes/Jetson.stl" scale="0.001 0.001 0.001"/> 
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+
+<!-- Front Wheel Left -->
+  <link name="fwl">
+      <!-- This controls the position and orientation of the tire with reference to the axis, this does not change the axis position -->
+    <visual>
+      <origin rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.036" length="0.029"/>  
+      </geometry>
+     <material name="black"/>
+    </visual>
+  </link>
+
+<!-- Back Wheel Left -->
+  <link name="bwl">
+      <!-- This controls the position and orientation of the tire with reference to the axis, this does not change the axis position -->
+    <visual>
+      <origin rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.036" length="0.029"/>  
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+<!-- Front Wheel Right -->
+  <link name="fwr">
+      <!-- This controls the position and orientation of the tire with reference to the axis, this does not change the axis position -->
+    <visual>
+      <origin rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.036" length="0.029"/>  
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+<!--Back  Wheel Right -->
+  <link name="bwr">
+      <!-- This controls the position and orientation of the tire with reference to the axis, this does not change the axis position -->
+    <visual>
+      <origin rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.036" length="0.029"/>  
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+
+
+<!-- JOINTS ARE LOCATED BELOW -->
+
+  <joint name="base_to_fwl" type="fixed">
+    <!-- This changes the location of the child link with reference to the parent link, meaning the axis position and orientation will change -->
+    <parent link="base_link"/>
+    <child link="fwl"/>
+    <origin xyz="0.16 0.09 0"/>
+  </joint>
+
+  <joint name="base_to_bwl" type="fixed">
+    <!-- This changes the location of the child link with reference to the parent link, meaning the axis position and orientation will change -->
+    <parent link="base_link"/>
+    <child link="bwl"/>
+    <origin xyz="0.001 0.09 0"/>
+  </joint>
+
+  <joint name="base_to_fwr" type="fixed">
+    <!-- This changes the location of the child link with reference to the parent link, meaning the axis position and orientation will change -->
+    <parent link="base_link"/>
+    <child link="fwr"/>
+    <origin xyz="0.16 -0.09 0"/>
+  </joint>
+
+  <joint name="base_to_bwr" type="fixed">
+    <!-- This changes the location of the child link with reference to the parent link, meaning the axis position and orientation will change -->
+    <parent link="base_link"/>
+    <child link="bwr"/>
+    <origin xyz="0.001 -0.09 0"/>
+  </joint>
+
+  <joint name="base_to_jetson" type="fixed">
+    <!-- This changes the location of the child link with reference to the parent link, meaning the axis position and orientation will change -->
+    <parent link="base_link"/>
+    <child link="jetson"/>
+    <origin xyz="0.055 0.0 0.068"/>
+  </joint>
+</robot>
+
+
+
+

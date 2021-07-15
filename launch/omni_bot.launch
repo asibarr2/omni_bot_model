@@ -1,0 +1,10 @@
+<launch>
+	<arg name="gui" default="False" />
+        <param name="robot_description" command="$(find xacro)/xacro.py '$(find omni_bot_model)/urdf/omni_bot.urdf'" />
+
+	<param name="use_gui" value="$(arg gui)"/>
+
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <node name="rviz" pkg="rviz" type="rviz" args="~/catkin_ws/src/omni_bot_model/omnibot.rviz" required="true" />
+</launch>
